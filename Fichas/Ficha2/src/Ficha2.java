@@ -9,6 +9,7 @@ public class Ficha2 {
 
         out.print("Exercicio: ");
         int ex = scan.nextInt();
+        int i,j;
 
         switch (ex) {
             case 1:
@@ -40,7 +41,6 @@ public class Ficha2 {
                 // 2. a)
                 // preencho a matriz fora do switch para poder utiliza-la nas
                 // alíneas seguintes.
-                int i,j;
                 out.println("Vamos preencher a matriz das notas");
                 for(i=0; i<5; i+=1) {
                     for (j=0; j < 5; j += 1) {
@@ -171,8 +171,32 @@ public class Ficha2 {
                         out.print("Alinea inexistente");
                         break;
                 }
+            case 7:
+                out.println("Let's gamble!!!!!");
+                Euromilhoes euromilhoes = new Euromilhoes(5,2);
+                euromilhoes.gerarChave();
+                int[] numerosUser = new int[5];
+                int[] estrelasUser = new int[2];
 
 
+                // pedir os números ao utilizador
+                out.println("Insira numeros entre 1 e 50");
+                for(i=0; i<5; i+=1){
+                    out.print("Numero " + (i+1) + ": ");
+                    int num = scan.nextInt();
+                    numerosUser[i] = num;
+                }
+
+                // pedir as chaves ao utilizador
+                out.println("Insira estrelas entre 1 e 9");
+                for(i=0; i<2; i+=1){
+                    out.print("Estrela " + (i+1) + ": ");
+                    int estrela = scan.nextInt();
+                    estrelasUser[i] = estrela;
+                }
+
+                euromilhoes.imprimeChave();
+                euromilhoes.comparaAposta(numerosUser, estrelasUser);
         }
 
     }
