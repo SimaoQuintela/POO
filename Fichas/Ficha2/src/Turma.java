@@ -12,11 +12,11 @@ public class Turma {
     }
 
     public void setNota(int aluno, int uc, int nota){
-        notasTurma[aluno][uc] = nota;
+        this.notasTurma[aluno][uc] = nota;
     }
 
     public int getNota(int aluno, int uc){
-        return notasTurma[aluno][uc];
+        return this.notasTurma[aluno][uc];
     }
 
 
@@ -41,7 +41,7 @@ public class Turma {
         int i, media = 0;
 
         for(i=0; i<this.ucs; i+=1)
-            media += notasTurma[alunoIndex][i];
+            media += this.notasTurma[alunoIndex][i];
 
         media = media/this.ucs;
 
