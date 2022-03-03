@@ -78,4 +78,17 @@ public class Array {
         }
 
     }
+
+    // 4. a)
+    public void ordena(int[] array){
+        Arrays.sort(array);
+    }
+
+    // 4. b)
+    public int procuraBinaria(int[] array, int x){
+        ordena(array);
+        return(Arrays.binarySearch(array, x));
+    }
+
+
 }
