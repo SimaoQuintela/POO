@@ -64,8 +64,8 @@ public class Ficha3 {
                             out.println(apps[i]);
                         }
                     case "c":
-                        telemovel.recebeMsg("I'm not very good at advice");
-                        telemovel.recebeMsg("Can I interest you a sarcastic comment?");
+                        telemovel.recebeMsg("I'm not great at the advice.");
+                        telemovel.recebeMsg("Can I interest you in a sarcastic comment?");
                         telemovel.recebeMsg("Some cheese?");
                         String[] mensagens = telemovel.getMensagens();
                         out.println("-------------- Mensagens --------------");
