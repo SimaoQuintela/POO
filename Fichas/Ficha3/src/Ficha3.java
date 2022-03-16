@@ -176,6 +176,62 @@ public class Ficha3 {
                 out.println(l.periodoConsumo());
                 break;
              */
+            case 5:
+                Futebol jogo = new Futebol(0,0,0);
+                out.println("Estado do jogo: " + jogo.getEstado());
+                jogo.startGame();
+                out.println("Estado do jogo: " + jogo.getEstado());
+                jogo.goloVisitado();
+                jogo.goloVisitado();
+                jogo.goloVisitado();
+                jogo.goloVisitante();
+                out.println("Visitado: " + jogo.getGolosEquipaVisitada());
+                out.println("Visitante: " + jogo.getGolosEquipaVisitante());
+                jogo.endGame();
+                out.println("Estado do jogo: " + jogo.getEstado());
+                out.println(jogo.resultadoActual());
+                break;
+            case 8:
+                Encomenda enc = new Encomenda("Supermercados Coviran", 123456789, "Rua sem nome", 47, LocalDateTime.now());
+                LinhaEncomenda l1 = new LinhaEncomenda("1234", "Chipicao", 0.99, 300, 13, 5);
+                LinhaEncomenda l2 = new LinhaEncomenda("2341", "Bollycao", 0.99, 300, 13, 5);
+                LinhaEncomenda l3 = new LinhaEncomenda("3412", "Iogurte Grego Pack-4", 0.99, 100, 23, 5);
+                LinhaEncomenda l4 = new LinhaEncomenda("4123", "Massa Milaneza", 1.25, 200, 23, 10);
+                enc.adicionaLinha(l1);
+                enc.adicionaLinha(l2);
+                enc.adicionaLinha(l3);
+                enc.adicionaLinha(l4);
+
+                out.println("Valor total: " + enc.calculaValorTotal());
+                out.println("Valor desconto: " + enc.calculaValorDesconto());
+                out.println("Número total de produtos: " + enc.numeroTotalProdutos());
+                out.println("Existe encomenda para o código 2341: " + enc.existeProdutoEncomenda("2341"));
+                out.println("Existe encomenda para o código 2349: " + enc.existeProdutoEncomenda("2349"));
+
+                out.println("------------ Produtos --------------");
+                for(LinhaEncomenda l: enc.getLinhasEncomenda()){
+                    out.println("Produto: " + l.getDescricao());
+                }
+
+                enc.removeProduto("2341");
+                enc.removeProduto("1234");
+                enc.removeProduto("3412");
+                enc.removeProduto("4123");
+                out.println("------------ Produtos --------------");
+                for(LinhaEncomenda l: enc.getLinhasEncomenda()){
+                    out.println("Produto: " + l.getDescricao());
+                }
+                break;
+            case 9:
+                Ponto p1 = new Ponto(0,0);
+                Ponto p2 = new Ponto(5,0);
+                Ponto p3 = new Ponto(0, 5);
+
+                Triangulo t = new Triangulo(p1,p2,p3);
+                out.println("Perímetro: " + t.calculaPerimetroTriangulo());
+                out.println("Área: " + t.calculaAreaTriangulo());
+                out.println("Altura: " + t.alturaTriangulo());
+                break;
         }
 
     }
