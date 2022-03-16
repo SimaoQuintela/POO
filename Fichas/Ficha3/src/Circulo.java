@@ -1,7 +1,7 @@
 import java.lang.Math;
 import java.lang.StringBuilder;
 
-// falta testar
+// 100% testado, tudo ok
 public class Circulo {
     private double x;
     private double y;
