@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.lang.StringBuilder;
 import java.util.Arrays;
-
+//100% testado, tudo ok
 public class Youtube {
     private String nomeVideo;
     private char[] conteudo;
@@ -15,45 +15,66 @@ public class Youtube {
     private int dislikes;
 
     public Youtube(){
-        this.nomeVideo = "";
+        this.setNomeVideo("");
         this.conteudo = new char[0];
-        this.data = LocalDateTime.now();
-        this.resolucao = 720;
-        this.minutos = 0;
-        this.segundos = 0;
+        this.setData(LocalDateTime.now());
+        this.setResolucao(720);
+        this.setMinutos(0);
+        this.setSegundos(0);
         this.comentarios = new String[0];
-        this.likes = 0;
-        this.dislikes = 0;
+        this.setLikes(0);
+        this.setDislikes(0);
     }
 
     public Youtube(String nomeVideo, char[] conteudo, LocalDateTime data, int resolucao, int minutos, int segundos){
-        this.nomeVideo = nomeVideo;
+        this.setNomeVideo(nomeVideo);
         this.conteudo = new char[conteudo.length];
         System.arraycopy(conteudo, 0, this.conteudo, 0, conteudo.length);
-        this.data = data;
-        this.resolucao = resolucao;
-        this.minutos = minutos;
-        this.segundos = segundos;
+        this.setData(data);
+        this.setResolucao(resolucao);
+        this.setMinutos(minutos);
+        this.setSegundos(segundos);
         this.comentarios = new String[0];
-        this.likes = 0;
-        this.dislikes = 0;
+        this.setLikes(0);
+        this.setDislikes(0);
+
     }
 
-    public boolean equals(Youtube umVideo){
-        return(this.nomeVideo.equals(umVideo.getNomeVideo()) && Arrays.equals(this.conteudo, umVideo.getConteudo()) &&
-               this.data == umVideo.getData() && this.resolucao == umVideo.getResolucao() && this.minutos == umVideo.getMinutos() &&
-               this.segundos == umVideo.getSegundos() && Arrays.equals(this.comentarios, umVideo.getComentarios()) &&
-               this.likes == umVideo.getLikes() && this.dislikes == umVideo.getDislikes() );
+    public Youtube(Youtube v){
+        this(v.getNomeVideo(), v.getConteudo(), v.getData(), v.getResolucao(), v.getMinutos(), v.getSegundos());
+    }
+
+    public boolean equals(Object umVideo){
+        if(this == umVideo)
+            return true;
+
+        if((umVideo == null) || (this.getClass() != umVideo.getClass()) )
+            return false;
+
+        Youtube v = (Youtube)umVideo;
+
+        return(this.getNomeVideo().equals(v.getNomeVideo()) && Arrays.equals(this.getConteudo(), v.getConteudo()) &&
+               this.getData() == v.getData() && this.getResolucao() == v.getResolucao() && this.getMinutos() == v.getMinutos() &&
+               this.getSegundos() == v.getSegundos() && Arrays.equals(this.getComentarios(), v.getComentarios()) &&
+               this.getLikes() == v.getLikes() && this.getDislikes() == v.getDislikes()
+        );
     }
 
     public String toString(){
-        return("Nome vídeo: " + this.getNomeVideo() +
-               "\nData: " + this.getData() +
-               "\nResolução: " + this.getResolucao() +
-               "\nDuração: " + this.getMinutos() + ":" + this.getSegundos() +
-               "\nLikes: " + this.getLikes() +
-               "\nDislikes" + this.getDislikes()
-            );
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Nome vídeo: ").append(this.getNomeVideo());
+        sb.append("\nData: ").append(this.getData());
+        sb.append("\nResolução: ").append(this.getResolucao());
+        sb.append("\nDuração: ").append(this.getMinutos()).append(":").append(this.getSegundos());
+        sb.append("\nLikes: ").append(this.getLikes());
+        sb.append("\nDislikes: ").append(this.getDislikes());
+
+        return sb.toString();
+    }
+
+    public Youtube clone(){
+        return new Youtube(this);
     }
 
     // 3. b)
@@ -68,7 +89,7 @@ public class Youtube {
     // 3. c)
     public long qtsDiasDepois(){
         LocalDateTime present = LocalDateTime.now();
-        LocalDateTime dataLancamento = this.data;
+        LocalDateTime dataLancamento = this.getData();
 
         return (ChronoUnit.DAYS.between(dataLancamento,present));
     }
@@ -140,7 +161,7 @@ public class Youtube {
     }
 
     public void setConteudo(char[] conteudo){
-        this.conteudo = new char[this.conteudo.length];
+        this.conteudo = new char[conteudo.length];
         System.arraycopy(conteudo, 0, this.conteudo, 0, conteudo.length);
     }
 

@@ -1,5 +1,7 @@
 import java.lang.System;
+import java.lang.StringBuilder;
 
+//100% testado, tudo ok
 public class Telemovel {
     private String marca;
     private String modelo;
@@ -17,52 +19,86 @@ public class Telemovel {
     private int numAppsInstaladas;
     private String[] nomeAppsInstaladas;
 
+    public Telemovel(){
+        this.setMarca("");
+        this.setModelo("");
+        this.setxDisplay(300);
+        this.setyDisplay(1024);
+        this.setNumeroMensagens(0);
+        this.setMensagens(128);
+        this.setArmazenamentoFotosApps(512);
+        this.setArmazenamentoFotos(128);
+        this.setArmazenamentoApps(384);
+        this.setEspacoOcupado(0);
+        this.setNumFotosGuardadas(0);
+        this.setNumAppsInstaladas(0);
+        this.setNomeAppsInstaladas(384);
+    }
+
     public Telemovel(String marca, String modelo, int xDisplay, int yDisplay, int numeroMensagens, int armFotosApps, int armFotos, int armApps){
-        this.marca = marca;
-        this.modelo = modelo;
-        this.xDisplay = xDisplay;
-        this.yDisplay = yDisplay;
-        this.numeroMensagens = 0;
-        this.mensagens = new String[numeroMensagens];
-        this.armazenamentoFotosApps = armFotosApps;
-        this.armazenamentoFotos = armFotos;
-        this.armazenamentoApps = armApps;
-        this.espacoOcupado = 0;
-        this.numFotosGuardadas = 0;
-        this.numAppsInstaladas = 0;
-        this.nomeAppsInstaladas = new String[armApps];
+        this.setMarca(marca);
+        this.setModelo(modelo);
+        this.setxDisplay(xDisplay);
+        this.setyDisplay(yDisplay);
+        this.setNumeroMensagens(0);
+        this.setMensagens(numeroMensagens);
+        this.setArmazenamentoFotosApps(armFotosApps);
+        this.setArmazenamentoFotos(armFotos);
+        this.setArmazenamentoApps(armApps);
+        this.setEspacoOcupado(0);
+        this.setNumFotosGuardadas(0);
+        this.setNumAppsInstaladas(0);
+        this.setNomeAppsInstaladas(armApps);
 
     }
 
-    public boolean equals(Telemovel umTelemovel){
-        return (this.marca.equals(umTelemovel.getMarca()) && this.modelo.equals(umTelemovel.getModelo())        &&
-                this.xDisplay == umTelemovel.getxDisplay() && this.yDisplay == umTelemovel.getyDisplay()        &&
-                this.numeroMensagens == umTelemovel.getNumeroMensagens() && this.armazenamentoFotosApps == umTelemovel.getArmazenamentoFotosApps() &&
-                this.armazenamentoFotos == umTelemovel.getArmazenamentoFotos() && this.armazenamentoApps == umTelemovel.getArmazenamentoApps()     &&
-                this.espacoOcupado == umTelemovel.getEspacoOcupado() && this.numFotosGuardadas == umTelemovel.getNumFotosGuardadas()               &&
-                this.numAppsInstaladas == umTelemovel.getNumAppsInstaladas()
+    public Telemovel(Telemovel t){
+        this(t.getMarca(), t.getModelo(), t.getxDisplay(), t.getyDisplay(), t.getNumeroMensagens(), t.getArmazenamentoFotosApps(), t.getArmazenamentoFotos(), t.getArmazenamentoApps());
+    }
+
+    public boolean equals(Object umTelemovel){
+        if(this == umTelemovel)
+            return true;
+
+        if((umTelemovel == null) || (this.getClass() != umTelemovel.getClass()))
+            return false;
+
+        Telemovel t = (Telemovel)umTelemovel;
+
+        return (this.getMarca().equals(t.getMarca()) && this.getModelo().equals(t.getModelo())        &&
+                this.getxDisplay() == t.getxDisplay() && this.getyDisplay() == t.getyDisplay()        &&
+                this.getNumeroMensagens() == t.getNumeroMensagens() && this.getArmazenamentoFotosApps() == t.getArmazenamentoFotosApps() &&
+                this.getArmazenamentoFotos() == t.getArmazenamentoFotos() && this.getArmazenamentoApps() == t.getArmazenamentoApps()     &&
+                this.getEspacoOcupado() == t.getEspacoOcupado() && this.getNumFotosGuardadas() == t.getNumFotosGuardadas()               &&
+                this.getNumAppsInstaladas() == t.getNumAppsInstaladas()
             );
     }
 
     public String toString(){
-        return(
-                "Marca: " + this.getMarca() +
-                "\nModelo: " + this.getModelo() +
-                "\nDisplay: " + this.getxDisplay() + "x" + this.getyDisplay() +
-                "\nNumero mensagens: " + this.getNumeroMensagens() +
-                "\nArmazenamento: " + this.getArmazenamentoFotosApps() +
-                "\nArmazenamento Fotos: " + this.getArmazenamentoFotos() +
-                "\nArmazenamento Apps: " + this.getArmazenamentoApps() +
-                "\nEspaço Ocupado: " + this.getEspacoOcupado() +
-                "\nNumero de fotos guardadas: " + this.getNumFotosGuardadas() +
-                "\nNumero de apps instaladas: " + this.getNumAppsInstaladas()
-            );
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Marca: ").append(this.getMarca());
+        sb.append("\nModelo: ").append(this.getModelo());
+        sb.append("\nResolução: ").append(this.getxDisplay()).append("x").append(this.getyDisplay());
+        sb.append("\nArmazenamento: ").append(this.getArmazenamentoFotosApps());
+        sb.append("\nEspaço ocupado: ").append(this.getEspacoOcupado());
+        sb.append("\nNumero de fotos guardadas: ").append(this.getArmazenamentoFotos());
+        sb.append("\nNumero de apps instaladas: ").append(this.getArmazenamentoApps());
+
+        return sb.toString();
+    }
+
+    public Telemovel clone(){
+        return new Telemovel(this);
     }
 
 
     // 2. a)
     public boolean existeEspaco(int numeroBytes){
-        return(this.getEspacoOcupado() +numeroBytes <= this.getArmazenamentoFotosApps());
+        int espaco = this.getEspacoOcupado();
+        int arm = this.getArmazenamentoFotosApps();
+
+        return(espaco +numeroBytes <= arm);
     }
 
     // 2. b)
@@ -81,7 +117,7 @@ public class Telemovel {
     public void recebeMsg(String msg){
         int n = this.getNumeroMensagens() +1;
         String[] novo = this.getMensagens();
-        this.mensagens = new String[n];
+        this.setMensagens(n);
         System.arraycopy(novo, 0, this.mensagens, 0, n-1);
         this.mensagens[n-1] = msg;
         this.setNumeroMensagens(n);
@@ -113,7 +149,7 @@ public class Telemovel {
         int n  = getNumAppsInstaladas() -1;
         String[] novo = new String[n];
         String[] apps = this.getNomeAppsInstaladas();
-        this.nomeAppsInstaladas = new String[n];
+        this.setNomeAppsInstaladas(n);
 
     /*  Debugg
         for(int i =0; i<n+1; i+=1)
@@ -122,10 +158,7 @@ public class Telemovel {
     */
 
         for(int i=0, j=0; i<n+1; i+=1){
-            if(apps[i] == null)
-                break;
-
-            if(!apps[i].equals(nome)) {
+            if(apps[i] != null && !apps[i].equals(nome)) {
                 novo[j] = apps[i];
                 j += 1;
             }
@@ -136,12 +169,6 @@ public class Telemovel {
         this.setNumAppsInstaladas(n);
         System.arraycopy(novo, 0, this.nomeAppsInstaladas, 0, this.getNumAppsInstaladas());
     }
-
-
-
-
-
-
 
 
     // Gets
@@ -200,10 +227,10 @@ public class Telemovel {
     }
 
     public String[] getNomeAppsInstaladas(){
-        String[] r = new String[this.numAppsInstaladas];
+        String[] r = new String[this.getNumAppsInstaladas()];
 
-        if(this.numAppsInstaladas > 0){
-            System.arraycopy(this.nomeAppsInstaladas, 0, r, 0, this.numAppsInstaladas);
+        if(this.getNumAppsInstaladas() > 0){
+            System.arraycopy(this.nomeAppsInstaladas, 0, r, 0, this.getNumAppsInstaladas());
         }
 
         return r;
@@ -230,6 +257,10 @@ public class Telemovel {
         this.numeroMensagens = numeroMensagens;
     }
 
+    public void setMensagens(int numeroMensagens){
+        this.mensagens = new String[numeroMensagens];
+    }
+
     public void setArmazenamentoFotosApps(int armazenamentoFotosApps){
         this.armazenamentoFotosApps = armazenamentoFotosApps;
     }
@@ -253,4 +284,9 @@ public class Telemovel {
     public void setNumAppsInstaladas(int numAppsInstaladas){
         this.numAppsInstaladas = numAppsInstaladas;
     }
+
+    public void setNomeAppsInstaladas(int armApps){
+        this.nomeAppsInstaladas = new String[armApps];
+    }
+
 }
