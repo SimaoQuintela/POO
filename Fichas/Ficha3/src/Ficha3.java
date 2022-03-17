@@ -226,8 +226,20 @@ public class Ficha3 {
                 Ponto p1 = new Ponto(0,0);
                 Ponto p2 = new Ponto(5,0);
                 Ponto p3 = new Ponto(0, 5);
-
                 Triangulo t = new Triangulo(p1,p2,p3);
+                Triangulo t2 = new Triangulo(p1,p2,p3);
+
+                // prova de que estou a usar bem a composição
+                out.println(t.getP1());
+                out.println(t2.getP1());
+                p1.setX(20);
+                p1.setY(2);
+                // altero o valor das coordenadas do ponto p1 mas
+                // os pontos dos triangulos t1 e t2 não mudam pq lhes
+                // passei um clone
+                out.println(t.getP1());
+                out.println(t2.getP1());
+
                 out.println("Perímetro: " + t.calculaPerimetroTriangulo());
                 out.println("Área: " + t.calculaAreaTriangulo());
                 out.println("Altura: " + t.alturaTriangulo());
